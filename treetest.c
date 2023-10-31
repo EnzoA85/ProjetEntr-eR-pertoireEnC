@@ -15,21 +15,15 @@ int main(int argc, char* argv[]) {
     // Charger la racine du répertoire à partir du fichier de configuration
     FILE* config_file = fopen("tree.conf", "r");
 
-    if (config_file == NULL) {
-        fprintf(stderr, "Erreur d'ouverture de tree.conf.\n");
-        return 1;
-    }
-
     char rootdir[1024];
+    // On chercher à trouver la valeur de rootdir dans le fichier de configuration et on la stock
     while (fgets(rootdir, sizeof(rootdir), config_file) != NULL) {
         if (rootdir[0] != '#' && strncmp(rootdir, "rootdir=", 8) == 0) {
-            // Si la ligne n'est pas un commentaire et commence par "rootdir=", utilisez cette valeur.
             break;
         }
     }
 
-    fclose(config_file);
-
+    // Vérification qu'il y un bien un chemin rentré dans le fichier de configuration
     if (rootdir[0] == '\0') {
         fprintf(stderr, "Aucun chemin rootdir spécifié dans tree.conf.\n");
         return 1;
