@@ -7,7 +7,7 @@
 
 void handleSIGHUP(int signum) {
     // Lire le nom du fichier depuis datafile
-    FILE *datafile = fopen("tree.conf", "r");
+    FILE *datafile = fopen("/tmp/treeload.data", "r");
     char filename[1024];
     fgets(filename, sizeof(filename), datafile);
     fclose(datafile);
@@ -30,7 +30,7 @@ void handleSIGHUP(int signum) {
 
 int main() {
     // Sauvegarder le PID dans le fichier pidfile
-    FILE *pidfile = fopen("tree.conf", "w");
+    FILE *pidfile = fopen("/tmp/treeload.pid", "w");
     fprintf(pidfile, "%d\n", getpid());
     fclose(pidfile);
 

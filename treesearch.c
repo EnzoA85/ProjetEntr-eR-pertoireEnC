@@ -6,7 +6,7 @@
 
 void sendSignalToTreeload(const char *filename) {
     // Lire le PID du fichier pidfile
-    FILE *pidfile = fopen("tree.conf", "r");
+    FILE *pidfile = fopen("/tmp/treeload.pid", "r");
     char pidBuffer[1024];
     fgets(pidBuffer, sizeof(pidBuffer), pidfile);
     fclose(pidfile);
@@ -21,7 +21,7 @@ void sendSignalToTreeload(const char *filename) {
     }
 
     // Écrire le nom du fichier dans le fichier datafile
-    FILE *datafile = fopen("tree.conf", "w");
+    FILE *datafile = fopen("/tmp/treeload.data", "w");
     fprintf(datafile, "%s", filename);
     fclose(datafile);
 }
